@@ -1,0 +1,115 @@
+{
+  "logging": {
+    "level": "info",
+    "enableConsoleLog": true,
+    "enableConsoleColors": false,
+    "logFile": "",
+    "logBaseDirectory": "",
+    "perPoolLogFile": false,
+    "statsRecorderEnabled": false
+  },
+  "api": {
+    "Enabled": true,
+    "port": 4009,
+    "ListenAddress": "*"
+  },
+  "banning": {
+    "manager": "integrated",
+    "banOnJunkReceive": true,
+    "banOnInvalidShares": false
+  },
+  "notifications": {
+    "enabled": true,
+    "email": {
+      "host": "smtp.example.com",
+      "port": 587,
+      "user": "user",
+      "password": "password",
+      "fromAddress": "info@yourpool.org",
+      "fromName": "support"
+    },
+    "admin": {
+      "enabled": false,
+      "emailAddress": "user@example.com",
+      "notifyBlockFound": true
+    }
+  },
+  "persistence": {
+    "postgres": {
+      "host": "127.0.0.1",
+      "port": 5432,
+      "user": "yourpooldbusername",
+      "password": "yourpooldbpassword",
+      "database": "yourpooldbname"
+    }
+  },
+  "paymentProcessing": {
+    "enabled": false,
+    "interval": 600,
+    "shareRecoveryFile": "recovered-shares.txt"
+  },
+  "pools": [
+    {
+      "id": "ubiqminers",
+      "enableInternalStratum": true,
+      "enabled": true,
+      "coin": {
+        "type": "UBQ"
+      },
+      "address": "yourpooladdress",
+      "rewardRecipients": [
+        {
+          "type": "op",
+          "address": "yourpoolopaddressforfees",
+          "percentage": 1
+        }
+      ],
+      "blockRefreshInterval": 200,
+      "clientConnectionTimeout": 600,
+      "banning": {
+        "enabled": true,
+        "time": 600,
+        "invalidPercent": 50,
+        "checkThreshold": 50
+      },
+      "ports": {
+        "4001": {
+          "ListenAddress": "*",
+          "difficulty": 0.1
+        },
+        "4002": {
+          "ListenAddress": "*",
+          "difficulty": 0.2
+        },
+        "4004": {
+          "ListenAddress": "*",
+          "difficulty": 0.4
+        },
+        "4008": {
+          "ListenAddress": "*",
+          "difficulty": 0.8
+        }
+      },
+      "daemons": [
+        {
+          "host": "127.0.0.1",
+          "port": 9588,
+          "user": "",
+          "password": ""
+        }
+      ],
+      "paymentProcessing": {
+        "enabled": false,
+        "minimumPayment": 0.1,
+        "minimumPaymentToPaymentId": 5.0,
+        "payoutScheme": "PPS",
+        "payoutSchemeConfig": {
+          "factor": 2.0
+        },
+        "walletPassword": "yourpoolwalletpassword",
+        "keepUncles": false,
+        "keepTransactionFees": false
+      }
+    }
+  ]
+}
